@@ -1,41 +1,15 @@
-import React, { useState } from 'react';
-import { submitContact } from '../utils/api';
-import toast from 'react-hot-toast';
+import React, { useState } from 'react'; // <-- Re-imported useState
 
 const Contact: React.FC = () => {
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    subject: '',
-    message: ''
-  });
-  const [loading, setLoading] = useState(false);
+  // State to hold the user's message
+  const [whatsappMessage, setWhatsappMessage] = useState('');
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    });
-  };
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setLoading(true);
-    
-    try {
-      await submitContact(formData);
-      toast.success('Message sent successfully!');
-      setFormData({ name: '', email: '', subject: '', message: '' });
-    } catch (error) {
-      toast.error('Failed to send message. Please try again.');
-    } finally {
-      setLoading(false);
-    }
-  };
+  // The phone number for the WhatsApp link
+  const whatsAppNumber = "918073369741";
 
   return (
     <div className="pt-16">
-      {/* Header */}
+      {/* Header (Unchanged) */}
       <section className="bg-gradient-to-r from-primary to-accent text-white py-16">
         <div className="max-w-7xl mx-auto px-4 text-center" data-aos="fade-up">
           <h1 className="text-5xl font-bold mb-6">Contact Us</h1>
@@ -45,11 +19,12 @@ const Contact: React.FC = () => {
         </div>
       </section>
 
-      {/* Contact Section */}
+      {/* Contact Section (Unchanged layout) */}
       <section className="py-16 bg-background">
         <div className="max-w-7xl mx-auto px-4">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-            {/* Contact Info */}
+            
+            {/* Contact Info (Unchanged) */}
             <div data-aos="fade-right">
               <h2 className="text-3xl font-bold mb-8">Get in Touch</h2>
               
@@ -60,8 +35,7 @@ const Contact: React.FC = () => {
                   </div>
                   <div>
                     <h3 className="font-semibold text-lg">Email</h3>
-                    <p className="text-gray-600">info@codeverse.tech</p>
-                    <p className="text-gray-600">careers@codeverse.tech</p>
+                    <p className="text-gray-600">projectcodeverse@gmail.com</p>
                   </div>
                 </div>
 
@@ -71,8 +45,8 @@ const Contact: React.FC = () => {
                   </div>
                   <div>
                     <h3 className="font-semibold text-lg">Phone</h3>
-                    <p className="text-gray-600">+91 9876543210</p>
-                    <p className="text-gray-600">+91 8765432109</p>
+                    <p className="text-gray-600">+91 8073369741</p>
+                    <p className="text-gray-600">+91 8073473519</p>
                   </div>
                 </div>
 
@@ -83,9 +57,7 @@ const Contact: React.FC = () => {
                   <div>
                     <h3 className="font-semibold text-lg">Address</h3>
                     <p className="text-gray-600">
-                      Tech Park, Electronic City<br />
-                      Bengaluru, Karnataka 560100<br />
-                      India
+                      Chikodi
                     </p>
                   </div>
                 </div>
@@ -97,15 +69,15 @@ const Contact: React.FC = () => {
                   <div>
                     <h3 className="font-semibold text-lg">Social Media</h3>
                     <div className="flex space-x-4 mt-2">
-                      <a href="#" className="text-primary hover:text-accent">LinkedIn</a>
-                      <a href="#" className="text-primary hover:text-accent">GitHub</a>
-                      <a href="#" className="text-primary hover:text-accent">Twitter</a>
+                      <a href="https://www.linkedin.com/in/codeverse-project-b1646b390/" className="text-primary hover:text-accent">LinkedIn</a>
+                      <a href="https://github.com/projectcodeverse" className="text-primary hover:text-accent">GitHub</a>
+                      <a href="https://www.instagram.com/codeverse_project" className="text-primary hover:text-accent">Instagram</a>
                     </div>
                   </div>
                 </div>
               </div>
 
-              {/* Map */}
+              {/* Map (Unchanged) */}
               <div className="mt-8">
                 <iframe
                   src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3888.8267813266897!2d77.6648!3d12.9141!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae149c0c9c3f8b%3A0x7c2b0c0c0c0c0c0c!2sElectronic%20City%2C%20Bengaluru%2C%20Karnataka!5e0!3m2!1sen!2sin!4v1234567890"
@@ -115,83 +87,55 @@ const Contact: React.FC = () => {
                   allowFullScreen
                   loading="lazy"
                   className="rounded-lg"
+                  title="Company Location Map"
                 ></iframe>
               </div>
             </div>
 
-            {/* Contact Form */}
+            {/* WhatsApp Textbox Section */}
             <div data-aos="fade-left">
               <div className="bg-white rounded-lg shadow-lg p-8">
                 <h2 className="text-3xl font-bold mb-8">Send us a Message</h2>
                 
-                <form onSubmit={handleSubmit} className="space-y-6">
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">
-                        Name *
-                      </label>
-                      <input
-                        type="text"
-                        name="name"
-                        value={formData.name}
-                        onChange={handleChange}
-                        required
-                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
-                      />
-                    </div>
-                    
-                    <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">
-                        Email *
-                      </label>
-                      <input
-                        type="email"
-                        name="email"
-                        value={formData.email}
-                        onChange={handleChange}
-                        required
-                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
-                      />
-                    </div>
-                  </div>
-
+                <div className="space-y-6">
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-2">
-                      Subject *
-                    </label>
-                    <input
-                      type="text"
-                      name="subject"
-                      value={formData.subject}
-                      onChange={handleChange}
-                      required
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
-                    />
-                  </div>
-
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
-                      Message *
+                      Your Message
                     </label>
                     <textarea
                       name="message"
-                      value={formData.message}
-                      onChange={handleChange}
-                      required
+                      value={whatsappMessage}
+                      onChange={(e) => setWhatsappMessage(e.target.value)}
                       rows={6}
                       className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
-                      placeholder="Tell us about your project or inquiry..."
+                      placeholder="Type your message for WhatsApp..."
                     />
                   </div>
 
-                  <button
-                    type="submit"
-                    disabled={loading}
-                    className="w-full bg-primary text-white py-3 px-6 rounded-lg font-semibold hover:bg-blue-600 transition-colors disabled:opacity-50"
+                  <a
+                    // Dynamically build the URL
+                    href={`https://wa.me/${whatsAppNumber}?text=${encodeURIComponent(whatsappMessage)}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    // Conditionally style the button
+                    className={`block w-full text-center bg-primary text-white py-3 px-6 rounded-lg font-semibold transition-colors ${
+                      !whatsappMessage
+                        ? 'opacity-50 cursor-not-allowed hover:bg-primary'
+                        : 'hover:bg-blue-600'
+                    }`}
+                    // Prevent click if there's no message
+                    onClick={(e) => {
+                      if (!whatsappMessage) {
+                        e.preventDefault();
+                        // Optionally, show a toast or alert
+                        // toast.error("Please enter a message first");
+                      }
+                    }}
                   >
-                    {loading ? 'Sending...' : 'Send Message'}
-                  </button>
-                </form>
+                    Chat on WhatsApp
+                  </a>
+                </div>
+
               </div>
             </div>
           </div>

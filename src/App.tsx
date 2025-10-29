@@ -20,16 +20,27 @@ function App() {
 
   return (
     <Router>
-      <div className="App bg-background min-h-screen">
+      {/* This div is now a flex container that runs vertically
+        and takes up at least the full screen height.
+      */}
+      <div className="App bg-background min-h-screen flex flex-col">
         <Navbar />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/services" element={<Services />} />
-          <Route path="/internship" element={<Internship />} />
-          <Route path="/projects" element={<Projects />} />
-          <Route path="/contact" element={<Contact />} />
-        </Routes>
+
+        {/* The <main> tag is semantic HTML for your main content.
+          'flex-grow' tells it to expand and take up all available
+          space between the Navbar and Footer.
+        */}
+        <main className="flex-grow">
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/services" element={<Services />} />
+            <Route path="/internship" element={<Internship />} />
+            <Route path="/projects" element={<Projects />} />
+            <Route path="/contact" element={<Contact />} />
+          </Routes>
+        </main>
+
         <Footer />
         <Toaster position="top-right" />
       </div>
