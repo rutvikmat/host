@@ -87,7 +87,7 @@ const Services: React.FC = () => {
                   to="/contact"
                   className="inline-block bg-primary text-white px-6 py-2 rounded-lg hover:bg-blue-600 transition-colors"
                 >
-                  Learn More
+                  Inquire Now
                 </Link>
               </div>
             ))}
